@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
+
+def libraryVersion = "0.0.1"
 
 android {
     namespace 'mx.pixzelle.utils'
@@ -10,7 +13,7 @@ android {
     defaultConfig {
         minSdk 28
         targetSdk 33
-        versionName "0.0.1"
+        versionName libraryVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -29,6 +32,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+    namespace 'mx.pixzelle.utils'
 }
 
 dependencies {
@@ -40,4 +51,18 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.pixzelle.utils'
+            artifactId = 'Utils-Android'
+            version = libraryVersion
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
 }
