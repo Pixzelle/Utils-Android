@@ -4,7 +4,7 @@ plugins {
     id 'maven-publish'
 }
 
-def libraryVersion = "0.0.6"
+def libraryVersion = "0.0.7"
 
 android {
     namespace 'mx.pixzelle.utils'
