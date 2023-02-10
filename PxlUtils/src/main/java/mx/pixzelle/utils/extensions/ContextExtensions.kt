@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -168,7 +167,7 @@ fun Context.readFileFromAssets(filename: String): String {
 
 fun AssetManager.copyAssetFolder(srcName: String, dstName: String): Boolean {
     return try {
-        var result = true
+        var result : Boolean
         val fileList = this.list(srcName) ?: return false
         if (fileList.isEmpty()) {
             result = copyAssetFile(srcName, dstName)
