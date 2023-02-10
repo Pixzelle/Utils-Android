@@ -1,3 +1,4 @@
+package mx.pixzelle.utils.common
 
 import android.content.Context
 import android.content.SharedPreferences
